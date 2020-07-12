@@ -1,0 +1,35 @@
+ UPDATE person SET email = 'manishUPDATE person SET first_name= 'lee' WHERE id = 11;a@gmail.com' WHERE first_name = 'manisha';
+select * from person where first_name = 'lee';
+
+
+         ON CONFLICT
+         DO NOTHING
+
+
+test=> INSERT INTO person (id, first_name, last_name, gender, date_of_birth, email)
+test-> VALUES (11,'lee','john','male', DATE '1995-09-24', 'lee@gmail.com')
+test-> ON CONFLICT (id) DO NOTHING;
+
+
+
+     upsert
+
+
+test=> INSERT INTO person (id, first_name, last_name, gender, date_of_birth, email)
+test-> VALUES (11,'lee','john','male', DATE '1995-09-24', 'lee@gmail.com')
+test-> ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email;
+
+
+
+test=> INSERT INTO person (id, first_name, last_name, gender, date_of_birth, email)
+test-> VALUES (11,'leee','joehn','male', DATE '1995-09-24', 'lee@gmail.com')
+test-> ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email,
+test-> last_name = EXCLUDED.last_name, first_name = EXCLUDED.first_name;
+
+
+         foreingm keys ,joints
+          & relationships
+
+
+
+

@@ -1,0 +1,116 @@
+test=> SELECT * FROM car;
+
+test=> SELECT MAX(price) FROM car;
+
+test=> SELECT MIN(price) FROM car;
+ SELECT AVG(price) FROM car;
+est=> SELECT ROUND(price) FROM car;
+
+test=> SELECT make, model, MIN(price) FROM car GROUP BY make, model;
+
+test=> SELECT make, model, MAX(price) FROM car GROUP BY make, model;
+
+         SUM
+
+
+
+test=> SELECT SUM(price) FROM car;
+
+test=> SELECT make, model, MAX(price) FROM car GROUP BY make, model;
+
+
+
+               basics of arithmetic operation
+
+
+
+test=> SELECT 10+2;
+test=> SELECT 10-2;
+test=> SELECT 10/2;
+test=> SELECT 10*2;
+test=> SELECT 5!;
+test=> SELECT 10%3;
+
+
+      arithmatic operation round
+
+test=> SELECT id, make, model, price * .10 FROM car;
+
+test=> SELECT id, make, model, price, ROUND(price * .10) FROM car;
+test=> SELECT id, make, model, price, ROUND(price * .10,2) FROM car;
+
+                  ALIAS
+
+test=> SELECT COALESCE(1);
+
+test=> SELECT COALESCE(1) AS number;
+
+
+test=> SELECT COALESCE(null, null, 1) AS number;
+
+
+test=> SELECT COALESCE(null, null, 1, 10) AS number;
+
+
+test=> SELECT COALESCE(email, 'email not provided') From person;
+
+
+
+              NULLIF
+
+
+test=> SELECT NULLIF(10, 10);
+
+
+test=> SELECT NULLIF(100, 1);
+
+test=> SELECT 10 / NULLIF(0,0);
+test=> SELECT 10 / NULLIF(2,9);
+test=> SELECT COALESCE(10 / NULLIF(0,0), 0);
+
+
+      TIMESTAMPS AND DATES
+
+test=> SELECT NOW();
+
+test=> SELECT NOW()::DATE;
+
+           ?column?
+------------------------------
+ 2019-06-06 08:49:45.13245+00
+(1 row)
+
+
+test=> SELECT NOW() - INTERVAL '10 YEAR';
+           ?column?
+-------------------------------
+ 2010-06-06 08:49:51.049018+00
+(1 row)
+
+
+
+
+test=> SELECT NOW() - INTERVAL '10 DAYS';
+
+test=> SELECT NOW() - INTERVAL '10 MONTHS';
+
+        EXTRACTING FIELDS
+
+
+test=> SELECT EXTRACT(YEAR FROM NOW());
+test=> SELECT EXTRACT(DOW FROM NOW());
+test=> SELECT EXTRACT(DAY FROM NOW());
+test=> SELECT EXTRACT(CENTURY FROM NOW());
+
+
+        AGE FUNCTION
+
+
+test=> SELECT first_name, last_name,gender FROM person;
+
+test=> SELECT first_name, last_name,gender,date_of_birth, AGE(NOW(), date_of_birth)AS age FROM person;
+
+
+
+
+
