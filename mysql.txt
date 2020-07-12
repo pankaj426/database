@@ -1,0 +1,345 @@
+create database student;
+use student;
+
+create table personal(
+id int,
+name varchar(50),
+birth_date date,
+phone varchar(12),
+gender varchar(1)
+);
+
+show tables;
+
+
+create table product(
+p_id int,
+pname varchar(50),
+pcompany varchar(50),
+price int
+);
+
+     insert
+
+
+
+insert into personal values('1', 'pankaj', '1995-01-01', '9721261671');
+insert into personal values('2', 'manisha', '1996-01-01', '9721261671', 'f');
+
+
+
+insert into personal
+values
+('3', 'jonh', '1992-01-01', '9721261671', 'm'),
+('4', 'scallet', '1945-01-01', '9721261671', 'f'),
+('5', 'angelina', '1995-01-01', '9721261671', 'f');
+
+              
+
+                     constrains
+
+
+
+
+create table personal1(
+id int not null unique,
+name varchar(50) not null,
+age int not null check (age >= 18),
+gender varchar(50) not null,
+phone varchar(12) not null unique,
+city varchar(15) default 'amethi'
+);
+
+
+
+insert into personal1 values ('2', 'pk1', '13', 'm', '9721261612', 'amethi');
+
+
+
+insert into personal1(id, name, age, gender, phone, city)
+values
+('1', 'pk1', '19', 'm', '4721261602','jais');
+
+
+insert into personal1(id, name, age, gender, phone)
+values
+('2', 'pk2', '19', 'm', '4721261602');
+
+insert into personal1(id, name, age, gender, phone)
+values
+('3', 'pk3', '19', 'm', '4721261602');
+
+insert into personal1(id, name, age, gender, phone)
+values
+('4', 'pk4', '19', 'm', '4721261602');
+
+
+
+
+
+            where clouse
+
+select * from personal1 where id = '2';
+select name, phone from personal1 where id = '2';
+select name as chutita, phone as moble from personal1 where id = '2';
+select * from personal1 where age < 20;
+   
+
+       and or not operator
+
+
+select * from personal1 where age > 18 and age < 23;
+select * from personal1 where age = 18 or age = 19;
+select * from personal1 where age = 18 ;
+
+     in , not in operator
+
+select * 
+from personal1
+where  age  in(18,21,19);
+
+select * 
+from personal1
+where  age not in(18,21,19)
+
+      between , not between
+
+select * from personal1
+where age between 18 and 19;
+
+select *
+from personal
+where birth_date between 1995-01-10 and 1996-01-01;
+
+
+select *
+from personal
+where birth_date not between 1995-01-10 and 1996-01-01;
+
+            LIKE & WILDCARD 
+select * 
+from personal1
+where name like "m%";
+
+
+select * from personal1
+where name like "p%";
+
+select * from personal1
+where name not like "p%";
+
+
+select * from personal1
+where binary name  like "p%";
+
+select * from personal1
+where binary name  like "P%";
+
+
+      REGULAR EXPRESSION
+
+
+select * from personal
+where name regexp '^m';
+
+
+select * from personal
+where name regexp 'sha$';
+
+select * from personal
+where name regexp 'pank';
+
+select * from personal
+where name regexp '^pan|^mani|ange';
+
+
+select * from personal
+where name regexp '^pan|^mani|hn$';
+
+
+
+select * from personal
+where name regexp '[pma]';
+
+
+select * from personal
+where name regexp '[pma]a';
+
+
+select * from personal
+where name regexp '[a-m]r';
+
+
+
+     ORDER ASS AND DESC
+
+select * from personal
+order by name asc;
+
+
+select * from personal
+order by name desc;
+
+
+select * from personal1
+where city = 'amethi'
+order by name desc;
+
+
+select * from personal1
+order by age desc;
+
+
+select * from personal1
+order by age ,name;
+
+      distinct
+ 
+
+
+select distinct city from personal1;
+select distinct age from personal1;
+select distinct age from personal1 order by age;
+select distinct city from personal1;
+
+         is null & is not null
+
+select *
+from personal1
+where name is not null;
+
+
+select *
+from personal1
+where name is null;
+
+
+         LIMIT OPPSET
+
+select *from personal1
+where city = 'amethi'
+limit 10;
+
+
+select *
+from personal1 limit 10;
+
+select *from personal1
+where city = 'amethi'
+order by name
+limit 10;
+
+   oppset
+
+select *from personal1
+where city = 'amethi'
+order by name
+limit 1, 10;
+
+        SUM COUNT MIN MAX AVG
+
+select SUM(age) from personal1;
+
+select avg(age) from personal1;
+
+select min(age) from personal1;
+
+select max(age) from personal1;
+
+select count(age) from personal1;
+
+select SUM(age) from personal1;
+
+select avg(age) from personal1;
+
+select min(age) from personal1;
+
+select max(age) from personal1;
+
+select count(distinct city) from personal1;
+
+
+    UPDATE
+
+
+update personal
+set name = 'manisha_vashisth'
+where name = 'manisha';
+
+
+
+update personal
+set gender = 'm'
+where id in (4,5);
+
+
+       COMMIT AND ROOLBACK
+
+COMMIT;
+
+update personal
+set gender = 'F'
+where id in (4,5);
+
+ROLLBACK;
+
+
+   delete
+
+delete from personal
+where id = 5;
+
+
+COMMIT;
+
+delete from personal
+where id = 1;
+
+ROLLBACK;
+
+
+
+           PRIMARY KEY AND FOREIGN KEY
+
+
+create table city(
+cid int not null AUTO_INCREMENT,
+cityname varchar(50) not null,
+primary key (cid)
+);
+
+
+insert into city (cityname)
+values('agra'),
+('delhi'),
+('bhopal'),
+('jaipur'),
+('noida');
+
+
+create table personal2(
+id int not null,
+name varchar(50) not null,
+percentage int not null,
+age int not null,
+gender varchar(1) not null,
+city int not null,
+primary key(id),
+foreign key (city) references city (cid)
+);
+
+
+insert into personal2 (id, name, percentage, age, gender, city)
+values ('1', 'ramkumar', '45', 18, 'm', 1),
+('2', 'pijaykur',  25,  13, 'm', 2),
+('3', 'tadikumr',  43,  15, 'f', 3),
+('4', 'ramiyakar', 35,  12, 'm', 1),
+('5', 'ramlakumr', 47,  17, 'f', 2),
+('6', 'kamkumar',  48,  19, 'm', 3),
+('7', 'jamkumar',  47,  10, 'f', 1),
+('8', 'pamkumar',  49,  38, 'm', 2),
+('9', 'lamkumar',  40,  28, 'f', 1);
+
+
+
+

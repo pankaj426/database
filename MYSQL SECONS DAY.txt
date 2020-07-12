@@ -1,0 +1,318 @@
+                      JOINTS
+
+select * 
+from personal2
+inner join city
+on personal2.city = city.cid;
+
+
+
+select name , city
+from personal2
+inner join city
+on personal2.city = city.cid;
+
+select * 
+from personal2 p
+inner join city c
+on p.city = c.cid;
+
+select p.id, p.name, p.percentage, p.age, c.cityname
+from personal2 p
+inner join city c
+on p.city = c.cid;
+
+
+
+select p.id, p.name, p.percentage, p.age, c.cityname
+from personal2 p
+inner join city c
+on p.city = c.cid
+where c.cityname = 'agra';
+
+
+
+select p.id, p.name, p.percentage, p.age, c.cityname
+from personal2 p
+inner join city c
+on p.city = c.cid
+where c.cityname = 'agra'
+order by p.name;
+
+
+         LEFT AND RIGHT JOINT
+
+
+select *
+from personal2
+LEFT join city
+on personal2.city = city.cid;
+
+
+select p.id, p.name, p.percentage, p.age, c.cityname
+from personal2 p
+left join city c
+on p.city = c.cid
+where c.cityname = 'agra';
+         
+
+rigth joint 
+
+select *
+from personal2
+right join city
+on personal2.city = city.cid;
+
+select p.id, p.name, p.percentage, p.age, c.cityname
+from personal2 p
+right join city c
+on p.city = c.cid
+where c.cityname = 'agra';
+
+
+       CROSS JOINT
+
+SELECT * 
+FROM personal2
+cross join city;
+
+SELECT * 
+FROM personal2
+cross join city;
+
+    
+      group by and having clouse
+
+select c.cityname, count(p.city)
+from personal2 p inner join city c
+on p.city = c.cid
+group by city;
+
+
+select c.cityname, count(p.city)
+from personal2 p inner join city c
+on p.city = c.cid
+where p.age >= 20
+group by city;
+
+
+
+select c.cityname, count(p.city)
+from personal2 p inner join city c
+on p.city = c.cid
+where p.age >= 20
+group by city
+order by count(p.city);
+       
+  HAVING
+
+
+
+         join multiple table
+
+
+select c.cityname, count(p.city)
+from personal2 p inner join city c
+on p.city = c.cid
+group by city
+having count(p.city) > 3
+order by count(p.city) desc;
+
+      sub query exists and not exists
+
+select name from personal2
+where city = (select cid from city where cityname = 'agra');
+
+
+select name from personal2
+where city in (select cid from city where cityname in ('agra','delhi'));
+
+   EXISTS
+
+select name from personal2
+where 
+exists(select cid from city where cityname = 'agra');
+
+select name from personal2
+where 
+not exists(select cid from city where cityname in ('bhopal'));
+
+
+           union & union all
+
+select id, name from personal 
+union
+select id, name from personal2;
+
+
+select id, name from personal where gender = 'm'
+union
+select id , name from personal2 where gender = 'f';
+
+
+
+
+
+select id, name from personal1 where city = 'amethi'
+union
+select id , name 
+from personal2 p inner join city c
+on p.city = c.cid
+where c.cityname = 'agra';
+
+
+
+      if case statment
+
+SELECT id, name, percentage,
+IF(percentage >= 45,"pass","fail") AS result
+FROM personal2;
+
+SELECT *,
+IF(percentage >= 45,"pass","fail") AS result
+FROM personal2;
+
+    CASE
+
+
+select *,
+case
+    when percentage >= 80 and percentage <= 100 then "merit"
+    when percentage >= 60 and percentage < 80 then "firdiv"
+    when percentage >= 45 and percentage < 60 then "secdiv"
+    when percentage >= 33 and percentage < 45 then "third"
+    when percentage < 33 then "faia"
+    else "not correct %"
+end as grade
+from personal2;
+
+
+
+UPDATE personal2 SET
+percentage = (CASE id
+     WHEN 3 then 39
+     WHEN 7 then 90
+END)
+WHERE id IN (2, 7);
+
+
+
+          arithmetical function
+
+select 5 + 6;
+
+select 5 % 6 as total;
+select 5 + 6 as total;
+
+
+select id, name,(percentage + 5)
+from personal2;
+
+select id, name,(percentage * 5)
+from personal2;
+  
+
+select pi();
+select round(3.33);
+select round(2.34433,2);
+select ceil(1.23);
+select floor(3.4);
+select pow(2,2);
+select sqrt(16);
+select rand(sqrt(5));
+select rand();
+select rand() * 100;
+select round(rand() * 100);
+select floor(7 + (rand() * 6));
+select floor(1 + (rand() * 5));
+
+select *
+from personal2 order by rand();
+
+select abs(-12.2);
+
+select sigm(24);
+select sign(0);
+select sign(-12);
+
+
+        string function
+select id, UPPER(name), percentage
+from personal2;
+
+select id, UPPER(name) as name, percentage
+from personal2;
+
+select id, LOWER(name) as name, percentage
+from personal2;
+
+select id, UCASE(name) as name, percentage
+from personal2;
+
+select id, LCASE(name) as name, percentage
+from personal2;
+
+select id, CHARACTER_LENGTH(name) as chare, percentage
+from personal2;
+
+select id, name, CHARACTER_LENGTH(name) as chare, percentage
+from personal2;
+
+
+select id, name, CHAR_LENGTH(name) as chare, percentage
+from personal2;
+
+select id, name, LENGTH(name) as chare, percentage
+from personal2;
+
+select id, CONCAT(name, " ", percentage) as name
+from personal2;
+
+
+select id, CONCAT_WS(name, " ", percentage) as name
+from personal2;
+SELECT CONCAT_WS(" - ", "BABA", "YOUTUBE", "CHANNEL") AS NAME;
+SELECT LTRIM("    YOUTUBE    ") AS NAME;
+SELECT RTRIM("    YOUTUBE    ") AS NAME;
+SELECT POSITION("YOUTUBE" IN "YJSHBJHSBDYOUTUBE") AS NAME;
+SELECT INSTR("YOUTUBE BABA BABA", "UT") AS NAME;
+SELECT LOCATE("UT", "YOUTUBE BABA BABA") AS NAME;
+SELECT LOCATE("UT", "YOUTUBE BABA BABA" ,3) AS NAME;
+
+
+
+
+
+  STRING FUNCTION2
+
+select substring("yahoo baba", 3);
+select substring("yahoo baba", 3) as name;
+select substring("yahoo baba", 3,6) as name;
+select substr("yahoo baba", 3,6) as name;
+select mid("yahoo baba", 3,6) as name;
+select substring_index("www.yahoobaba.net",".",2) as name;
+select left("www.yahoobaba.net",2) as name;
+
+select right("www.yahoobaba.net",2) as name;
+
+select rpad("www.yahoobaba.net",200,"-") as name;
+
+
+
+select lpad("www.yahoobaba.net",200,"*") as name;
+select space(100) as name;
+select reverse("pankajnjai") as name;
+select replace("pankajnjai","pankaj","manisha") as name;
+select strcmp("pankajnjai","mapankaj") as name;
+select field("a","x","a","k","a") as name;
+
+select find_in_set("ram","ram,mohan,shyam") as name;
+
+select format(255.3534,2) as value;
+
+
+select hex("yahoobaba") as value;
+
+
+
+

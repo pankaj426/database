@@ -1,0 +1,85 @@
+alter table personal
+add email varchar(255);
+
+select * from personal;
+
+
+alter table personal
+modify email varchar(255)
+after name;
+
+alter table personal
+modify email int(10);
+
+alter table personal
+modify email varchar(110);
+
+alter table personal
+add unique (email);
+
+
+alter table personal
+change email emailid varchar(255);
+
+select * from personal;
+
+
+alter table personal
+drop column emailid;
+
+alter table personal 
+rename personal0;
+
+
+alter table city
+auto_increment = 4;
+
+
+
+   drop and veiw
+
+drop table product;
+truncate table product;
+
+
+       veiw
+
+create view pkview
+as
+select id, name from personal2 p
+inner join city c
+on p.city = c.cid;
+
+create view pkview
+as
+select * 
+from personal2
+inner join city
+on personal2.city = city.cid;
+
+
+select * from pkview;
+
+
+alter view pkview 
+as
+select id, name from personal2 p
+inner join city c
+on p.city = c.cid;
+
+
+
+rename table pkview
+to pkview111;
+
+     
+    index
+select * from personal where birth_date > "1993-01-01"; 
+create index studdob on personal (birth_date);
+show index from personal;
+drop index studdob on personal;
+
+
+
+
+
